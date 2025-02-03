@@ -26,7 +26,7 @@ def recursiva(n):
         return C_ncacheparentesis[n]
 
 inicio = time.time()
-result = recursiva(12)
+result = recursiva(9)
 fin = time.time() - inicio
 
 with open("output.csv", "w") as file:
