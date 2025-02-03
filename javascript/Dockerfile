@@ -1,5 +1,5 @@
 FROM node:18-alpine
 
-WORKDIR /app
+WORKDIR /javascript
 COPY script.js .
 CMD ["node", "script.js"]
