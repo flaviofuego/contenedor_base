@@ -1,7 +1,7 @@
 FROM openjdk:17-alpine
 
 WORKDIR /java
-COPY main.java .
-RUN javac main.java
+COPY Main.java .
+RUN javac Main.java
 
 CMD ["java", "main"]
