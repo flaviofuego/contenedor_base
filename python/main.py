@@ -29,5 +29,5 @@ inicio = time.time()
 result = recursiva(12)
 fin = time.time() - inicio
 
-with open("./output.csv", "w") as file:
+with open("output.csv", "w") as file:
     file.write("python," + str(fin) + "\n")

@@ -4,7 +4,7 @@ FROM python:3.9-slim
 WORKDIR /python
 
 # Copy the current directory contents into the container at /app
-COPY . /python
+COPY main.py .
 
 # Install any needed packages specified in requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
@@ -13,4 +13,4 @@ RUN pip install --no-cache-dir -r requirements.txt
 CMD ["python", "app.py"]
 
 # Mount the volume
-VOLUME ["/output.csv"]
+#VOLUME ["/output.csv"]
