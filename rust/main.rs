@@ -35,6 +35,6 @@ fn main() {
     let result = recursiva(12, &mut cache);
     let fin = inicio.elapsed().as_secs_f64();
 
-    let mut file = File::create("output.csv").unwrap();
+    let mut file = File::create("data/output.csv").unwrap();
     writeln!(file, "rust,{}", fin).unwrap();
 }

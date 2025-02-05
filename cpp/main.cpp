@@ -43,7 +43,7 @@ int main() {
     auto result = recursiva(12, cache);
     auto fin = std::chrono::duration<double>(std::chrono::high_resolution_clock::now() - inicio).count();
 
-    std::ofstream file("output.csv");
+    std::ofstream file("data/output.csv");
     file << "c++," << fin << "\n";
     file.close();
 
