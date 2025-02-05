@@ -32,7 +32,7 @@ fn recursiva(n: usize, cache: &mut HashMap<usize, Vec<String>>) -> Vec<String> {
 fn main() {
     let mut cache = HashMap::new();
     let inicio = Instant::now();
-    let result = recursiva(12, &mut cache);
+    let _result = recursiva(12, &mut cache);
     let fin = inicio.elapsed().as_secs_f64();
 
     let mut file = File::create("data/output.csv").unwrap();
