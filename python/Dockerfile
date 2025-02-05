@@ -7,7 +7,7 @@ WORKDIR /python
 COPY main.py .
 
 # Run app.py when the container launches
-CMD ["python", "app.py"]
+CMD ["python", "main.py"]
 
 # Mount the volume
 #VOLUME ["/output.csv"]
