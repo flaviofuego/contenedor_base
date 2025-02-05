@@ -35,4 +35,4 @@ const inicio = Date.now();
 const result = recursiva(12);
 const fin = (Date.now() - inicio) / 1000;
 
-fs.writeFileSync('data/output.csv', `javascript,${fin}\n`);
+fs.appendFileSync('data/output.csv', `javascript,${fin}\n`);

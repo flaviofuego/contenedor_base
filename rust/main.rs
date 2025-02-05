@@ -35,6 +35,10 @@ fn main() {
     let _result = recursiva(12, &mut cache);
     let fin = inicio.elapsed().as_secs_f64();
 
-    let mut file = File::create("data/output.csv").unwrap();
+    let mut file = OpenOptions::new()
+    .append(true)  // Abrir en modo apéndice para no sobrescribir
+    .open("data/output.csv")
+    .unwrap();
+
     writeln!(file, "rust,{}", fin).unwrap();
 }

@@ -40,7 +40,7 @@ public class Main {
         long end = System.currentTimeMillis() - start;
 
         // Guardar en output.csv
-        try (FileWriter writer = new FileWriter("data/output.csv")) {
+        try (FileWriter writer = new FileWriter("data/output.csv", true)) {
             writer.write("java," + end/1000.0 + "\n"); // en segundos, por consistencia con Python
         } catch (IOException e) {
             e.printStackTrace();
