@@ -1,6 +1,6 @@
 FROM node:18-alpine
 
-WORKDIR /javascript
+WORKDIR /app
 COPY main.js .
-RUN mkdir data
+#RUN mkdir data
 CMD ["node", "main.js"]

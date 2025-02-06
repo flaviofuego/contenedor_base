@@ -1,8 +1,8 @@
 FROM gcc:12.2.0
 
-WORKDIR /cpp
+WORKDIR /app
 COPY main.cpp .
-RUN mkdir data
+#RUN mkdir data
 
 RUN g++ main.cpp -o main -O2
 

@@ -1,12 +1,12 @@
 # Use the official Python image from the Docker Hub
 FROM python:3.9-slim
 
-WORKDIR /python
+WORKDIR /app
 
 # Copy the current directory contents into the container at /app
 COPY main.py .
 
-RUN mkdir data
+#RUN mkdir data
 # Run app.py when the container launches
 CMD ["python", "main.py"]
 
