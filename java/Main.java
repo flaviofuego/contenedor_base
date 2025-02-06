@@ -39,6 +39,8 @@ public class Main {
         recursiva(12);
         long end = System.currentTimeMillis() - start;
 
+        System.out.println("Tiempo de ejecución: " + end + " ms");
+
         // Guardar en output.csv
         try (FileWriter writer = new FileWriter("data/output.csv", true)) {
             writer.write("java," + end/1000.0 + "\n"); // en segundos, por consistencia con Python

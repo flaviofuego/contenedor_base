@@ -43,6 +43,9 @@ int main() {
     auto result = recursiva(12, cache);
     auto fin = std::chrono::duration<double>(std::chrono::high_resolution_clock::now() - inicio).count();
 
+    // Imprime el tiempo de ejecución
+    std::cout << "Tiempo de ejecución: " << fin << " segundos" << std::endl;
+
     std::ofstream file("data/output.csv", std::ios::app); // Abre el archivo en modo append
     if (file.is_open()) {
         file << "c++," << fin << "\n"; // Agrega datos al final del archivo
