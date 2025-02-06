@@ -1,23 +1,20 @@
-#Usa la imagen oficial de Golang
-FROM golang:1.16.3
 
-#Crea el directorio de trabajo
-WORKDIR /go/src/app
+FROM golang:alpine3.21
 
-#Copia el archivo go.mod y go.sum
-COPY go.mod go.sum ./
 
-#Descarga las dependencias
-RUN go mod download
+# Establecer el directorio de trabajo dentro del contenedor
+WORKDIR /go
 
-#Copia el resto de los archivos
-COPY . .
+# Copiar el archivo main.go al directorio de trabajo
+COPY main.go .
 
-#Compila el proyecto
-RUN go build -o /go/bin/app
+# Compilar el programa
+RUN go build -o main main.go
 
-RUN mkdir data
-#Ejecuta el proyecto
-CMD ["/go/bin/app"]
+# Crear un directorio para el volumen compartido
+RUN mkdir -p /go/data
+
+CMD ["./main"]
+
 
 
