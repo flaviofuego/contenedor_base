@@ -6,6 +6,7 @@ WORKDIR /python
 # Copy the current directory contents into the container at /app
 COPY main.py .
 
+RUN mkdir data
 # Run app.py when the container launches
 CMD ["python", "main.py"]
 

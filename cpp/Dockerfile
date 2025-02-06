@@ -2,6 +2,8 @@ FROM gcc:12.2.0
 
 WORKDIR /cpp
 COPY main.cpp .
+RUN mkdir data
+
 RUN g++ main.cpp -o main -O2
 
 CMD ["./main"]

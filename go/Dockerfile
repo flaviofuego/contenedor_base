@@ -16,6 +16,7 @@ COPY . .
 #Compila el proyecto
 RUN go build -o /go/bin/app
 
+RUN mkdir data
 #Ejecuta el proyecto
 CMD ["/go/bin/app"]
 
