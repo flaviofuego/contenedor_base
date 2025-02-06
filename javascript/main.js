@@ -37,4 +37,4 @@ const fin = (Date.now() - inicio) / 1000;
 
 console.log(`Tiempo de ejecucion: ${fin} s` );
 
-fs.appendFileSync('data/output.csv', `javascript,${fin}\n`);
+fs.appendFileSync('/app/data/output.csv', `javascript,${fin}\n`);
