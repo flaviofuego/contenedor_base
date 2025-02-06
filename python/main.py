@@ -31,5 +31,5 @@ fin = time.time() - inicio
 
 print("Tiempo de ejecución: ", fin , "segundos")
 
-with open("./data/output.csv", "a") as file:
+with open("data/output.csv", "a") as file:
     file.write("python," + str(fin) + "\n")
