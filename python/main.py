@@ -29,7 +29,7 @@ inicio = time.time()
 result = recursiva(9)
 fin = time.time() - inicio
 
-print("Tiempo de ejecución: ", fin)
+print("Tiempo de ejecución: ", fin , "segundos")
 
 with open("./data/output.csv", "a") as file:
     file.write("python," + str(fin) + "\n")
