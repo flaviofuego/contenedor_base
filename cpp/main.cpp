@@ -47,7 +47,7 @@ int main() {
     std::cout << "Tiempo de ejecución: " << fin << " segundos" << std::endl;
 
     // abre el archivo
-    std::ofstream file("data/output.txt", std::ios::app);
+    std::ofstream file("data/output_cpp.txt", std::ios::app);
     if (file.is_open()) {
         file << "c++," << fin << "\n"; // Agrega datos al final del archivo
         // guarda el resultado en el archivo

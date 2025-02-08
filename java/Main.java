@@ -63,7 +63,7 @@ public class Main {
         
         System.out.println("Tiempo de ejecución: " + fin + " segundos");
         
-        try(FileWriter file = new FileWriter("data/output.txt")) {
+        try(FileWriter file = new FileWriter("data/output_java.txt")) {
             file.write("java," + fin + "\n");
             for(String s : result) {
                 file.write(s + "\n");

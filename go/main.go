@@ -44,7 +44,7 @@ func main() {
     fmt.Println("Tiempo de ejecución:", duracion, "segundos")
 
     // Guardar en archivo CSV
-    file, err := os.OpenFile("data/output.txt", os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
+    file, err := os.OpenFile("data/output_go.txt", os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
     if err != nil {
         fmt.Println("Error abriendo archivo:", err)
         return
