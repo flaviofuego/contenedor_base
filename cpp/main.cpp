@@ -47,18 +47,24 @@ int main() {
     std::cout << "Tiempo de ejecución: " << fin << " segundos" << std::endl;
 
     // abre el archivo
-    std::ofstream file("data/output_cpp.txt", std::ios::app);
+    std::ofstream file("data/time_cpp.txt", std::ios::app);
     if (file.is_open()) {
         file << "c++," << fin << "\n"; // Agrega datos al final del archivo
-        // guarda el resultado en el archivo
-        for (const auto& r : result) {
-            // la separación de los resultados \n
-            file << r << "\n";
-        }
         file.close();
     } else {
         std::cerr << "No se pudo abrir el archivo." << std::endl;
     }
 
+    // guarda el resultado en un archivo
+    std::ofstream file_result("data/output_cpp.txt");
+    if (file_result.is_open()) {
+        for (const auto& r : result) {
+            file_result << r << std::endl;
+        }
+        file_result.close();
+    } else {
+        std::cerr << "No se pudo abrir el archivo." << std::endl;
+    }
+    
     return 0;
 }

@@ -38,7 +38,7 @@ func recursiva(n int) []string {
 
 func main() {
     inicio := time.Now()
-    result := recursiva(9)
+    result := recursiva(12)
     duracion := time.Since(inicio).Seconds()
 
     fmt.Println("Tiempo de ejecución:", duracion, "segundos")
@@ -53,12 +53,9 @@ func main() {
 
     _, err = file.WriteString(fmt.Sprintf("go,%.6f\n", duracion))
     // escribir en el archivo el resultado de la función recursiva
-    file.WriteString(fmt.Sprintf("%v\n", result))
+    _, err = file.WriteString(fmt.Sprintf("%v\n", result))
 
     if err != nil {
         fmt.Println("Error escribiendo en el archivo:", err)
     }
-
-    // Solo para que no aparezca variable sin usar
-    _ = result
 }

@@ -58,13 +58,18 @@ public class Main {
 
     public static void main(String[] args) {
         long inicio = System.nanoTime();
-        List<String> result = recursiva(9);
+        List<String> result = recursiva(12);
         double fin = (System.nanoTime() - inicio) / 1_000_000_000.0;
         
         System.out.println("Tiempo de ejecución: " + fin + " segundos");
         
-        try(FileWriter file = new FileWriter("data/output_java.txt")) {
+        try(FileWriter file = new FileWriter("data/time_java.txt")) {
             file.write("java," + fin + "\n");
+        } catch(IOException e) {
+            e.printStackTrace();
+        }
+
+        try(FileWriter file = new FileWriter("data/output_java.txt")) {
             for(String s : result) {
                 file.write(s + "\n");
             }

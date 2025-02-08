@@ -26,12 +26,14 @@ def recursiva(n):
         return C_ncacheparentesis[n]
 
 inicio = time.time()
-result = recursiva(9)
+result = recursiva(12)
 fin = time.time() - inicio
 
 print("Tiempo de ejecución: ", fin , "segundos")
 
-with open("data/output_python.txt", "w") as file:
+with open("data/time_python.txt", "w") as file:
     file.write("python," + str(fin) + "\n")
+
+with open("data/output_python.txt", "rw") as file:
     for r in result:
         file.write(r + "\n")
