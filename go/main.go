@@ -44,7 +44,7 @@ func main() {
     fmt.Println("Tiempo de ejecución:", duracion, "segundos")
 
     // Guardar en archivo CSV
-    file, err := os.OpenFile("data/output_go.txt", os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
+    file, err := os.OpenFile("data/time_go.txt", os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
     if err != nil {
         fmt.Println("Error abriendo archivo:", err)
         return
@@ -52,8 +52,10 @@ func main() {
     defer file.Close()
 
     _, err = file.WriteString(fmt.Sprintf("go,%.6f\n", duracion))
-    // escribir en el archivo el resultado de la función recursiva
-    _, err = file.WriteString(fmt.Sprintf("%v\n", result))
+    
+    // abre otro archivo para guardar los resultados
+    file, err = os.OpenFile("data/output_go.txt", os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
+    file.WriteString(fmt.Sprintf("%v\n", result))
 
     if err != nil {
         fmt.Println("Error escribiendo en el archivo:", err)
