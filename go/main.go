@@ -43,8 +43,8 @@ func main() {
 
     fmt.Println("Tiempo de ejecución:", duracion, "segundos")
 
-    // Guardar en archivo CSV
-    file, err := os.OpenFile("data/time_go.txt", os.O_CREATE|os.O_WRONLY, 0644)
+    // Guardar en archivo Txt
+    file, err := os.OpenFile("data/time_go.txt", os.O_CREATE|os.O_WRONLY|os.O_TRUNC, 0644)
     if err != nil {
         fmt.Println("Error abriendo archivo:", err)
         return
@@ -54,9 +54,14 @@ func main() {
     _, err = file.WriteString(fmt.Sprintf("go,%.6f\n", duracion))
     
     // abre otro archivo para guardar los resultados
-    file, err = os.OpenFile("data/output_go.txt", os.O_CREATE|os.O_WRONLY, 0644)
-    file.WriteString(fmt.Sprintf("%v\n", result))
+    file, err = os.OpenFile("data/output_go.txt", os.O_CREATE|os.O_WRONLY|os.O_TRUNC, 0644)
+    if err != nil {
+        fmt.Println("Error abriendo archivo:", err)
+        return
+    }
+    defer file.Close()
 
+    _, err = file.WriteString(fmt.Sprintf("%v\n", result))
     if err != nil {
         fmt.Println("Error escribiendo en el archivo:", err)
     }
