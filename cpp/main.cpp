@@ -46,9 +46,14 @@ int main() {
     // Imprime el tiempo de ejecución
     std::cout << "Tiempo de ejecución: " << fin << " segundos" << std::endl;
 
-    std::ofstream file("/app/data/output.csv", std::ios::app); // Abre el archivo en modo append
+    // abre el archivo
+    std::ofstream file("data/output.txt", std::ios::app);
     if (file.is_open()) {
         file << "c++," << fin << "\n"; // Agrega datos al final del archivo
+        // guarda el resultado en el archivo
+        for (const auto& r : result) {
+            file << r << std::endl;
+        }
         file.close();
     } else {
         std::cerr << "No se pudo abrir el archivo." << std::endl;

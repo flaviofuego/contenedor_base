@@ -63,8 +63,11 @@ public class Main {
         
         System.out.println("Tiempo de ejecución: " + fin + " segundos");
         
-        try(FileWriter file = new FileWriter("/app/data/output.csv", true)) {
+        try(FileWriter file = new FileWriter("data/output.txt")) {
             file.write("java," + fin + "\n");
+            for(String s : result) {
+                file.write(s + "\n");
+            }
         } catch(IOException e) {
             e.printStackTrace();
         }
