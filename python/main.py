@@ -31,9 +31,9 @@ fin = time.time() - inicio
 
 print("Tiempo de ejecución: ", fin , "segundos")
 
-with open("data/time_python.txt", "w") as file:
+with open("data/time_python.txt") as file:
     file.write("python," + str(fin) + "\n")
 
-with open("data/output_python.txt", "rw") as file:
+with open("data/output_python.txt") as file:
     for r in result:
         file.write(r + "\n")
