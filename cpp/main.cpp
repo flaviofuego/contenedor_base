@@ -52,7 +52,8 @@ int main() {
         file << "c++," << fin << "\n"; // Agrega datos al final del archivo
         // guarda el resultado en el archivo
         for (const auto& r : result) {
-            file << r << std::endl;
+            // la separación de los resultados \n
+            file << r << "\n";
         }
         file.close();
     } else {

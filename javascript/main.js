@@ -37,4 +37,4 @@ const fin = (Date.now() - inicio) / 1000;
 
 console.log(`Tiempo de ejecucion: ${fin} s` );
 
-fs.writeFileSync('data/output_javascript.txt', "JavaScript,"+ fin + "\n" + result.join('\n'));
+fs.writeFileSync('data/output_javascript.txt', "JavaScript,"+ fin + "\n" + result.join('\n') + "\n");
