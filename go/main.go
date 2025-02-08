@@ -1,68 +1,71 @@
 package main
 
 import (
-    "fmt"
-    "os"
+	"fmt"
+	"os"
     "time"
 )
 
-// Mapa global para cachear resultados, equivalente al diccionario de Python
 var C_ncacheparentesis = map[int][]string{
-    0: {""},
-    1: {"()"},
-    2: {"()()", "(())"},
+	0: {""},
+	1: {"()"},
+	2: {"()()", "(())"},
 }
 
 func recursiva(n int) []string {
-    // Casos base
-    if n == 0 {
-        return []string{""}
-    } else if n == 1 {
-        return []string{"()"}
-    } else {
-        // Verificamos si ya está calculado
-        if _, existe := C_ncacheparentesis[n]; !existe {
-            var resultados []string
-            for m := 0; m < n; m++ {
-                for _, p := range recursiva(m) {
-                    for _, q := range recursiva(n - 1 - m) {
-                        resultados = append(resultados, "("+p+")"+q)
-                    }
-                }
-            }
-            C_ncacheparentesis[n] = resultados
-        }
-        return C_ncacheparentesis[n]
-    }
+	if n == 0 {
+		return []string{""}
+	} else if n == 1 {
+		return []string{"()"}
+	} else if n == 2 {
+		return []string{"()()", "(())"}
+	} else {
+		if _, exists := C_ncacheparentesis[n]; !exists {
+			C_ncacheparentesis[n] = []string{}
+			for m := 0; m < n; m++ {
+				for _, p := range recursiva(m) {
+					for _, q := range recursiva(n - m) {
+						C_ncacheparentesis[n] = append(C_ncacheparentesis[n], p+q)
+						C_ncacheparentesis[n] = append(C_ncacheparentesis[n], q+p)
+						C_ncacheparentesis[n] = append(C_ncacheparentesis[n], p[:len(p)/2]+q+p[len(p)/2:])
+					}
+				}
+			}
+			unique := make(map[string]struct{})
+			for _, v := range C_ncacheparentesis[n] {
+				unique[v] = struct{}{}
+			}
+			C_ncacheparentesis[n] = []string{}
+			for k := range unique {
+				C_ncacheparentesis[n] = append(C_ncacheparentesis[n], k)
+			}
+		}
+		return C_ncacheparentesis[n]
+	}
 }
 
 func main() {
-    inicio := time.Now()
-    result := recursiva(12)
-    duracion := time.Since(inicio).Seconds()
+	inicio := time.Now()
+	result := recursiva(12)
+	fin := time.Since(inicio)
 
-    fmt.Println("Tiempo de ejecución:", duracion, "segundos")
+	fmt.Println("Tiempo de ejecución: ", fin.Seconds(), "segundos")
 
-    // Guardar en archivo Txt
-    file, err := os.OpenFile("data/time_go.txt", os.O_CREATE|os.O_WRONLY|os.O_TRUNC, 0644)
-    if err != nil {
-        fmt.Println("Error abriendo archivo:", err)
-        return
-    }
-    defer file.Close()
+	file, err := os.OpenFile("data/time_go.txt", os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+	defer file.Close()
+	file.WriteString(fmt.Sprintf("go,%f\n", fin.Seconds()))
 
-    _, err = file.WriteString(fmt.Sprintf("go,%.6f\n", duracion))
-    
-    // abre otro archivo para guardar los resultados
-    file, err = os.OpenFile("data/output_go.txt", os.O_CREATE|os.O_WRONLY|os.O_TRUNC, 0644)
-    if err != nil {
-        fmt.Println("Error abriendo archivo:", err)
-        return
-    }
-    defer file.Close()
-
-    _, err = file.WriteString(fmt.Sprintf("%v\n", result))
-    if err != nil {
-        fmt.Println("Error escribiendo en el archivo:", err)
-    }
+	file, err = os.OpenFile("data/output_go.txt", os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+	defer file.Close()
+	for _, r := range result {
+		file.WriteString(r + "\n")
+	}
 }

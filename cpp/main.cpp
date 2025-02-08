@@ -1,9 +1,10 @@
 #include <iostream>
 #include <vector>
+#include <string>
 #include <unordered_map>
 #include <set>
-#include <chrono>
 #include <fstream>
+#include <chrono>
 
 std::unordered_map<int, std::vector<std::string>> C_ncacheparentesis = {
     {0, {""}},
@@ -11,7 +12,7 @@ std::unordered_map<int, std::vector<std::string>> C_ncacheparentesis = {
     {2, {"()()", "(())"}}
 };
 
-std::vector<std::string> recursiva(int n, std::unordered_map<int, std::vector<std::string>>& cache) {
+std::vector<std::string> recursiva(int n) {
     if (n == 0) {
         return {""};
     } else if (n == 1) {
@@ -19,52 +20,41 @@ std::vector<std::string> recursiva(int n, std::unordered_map<int, std::vector<st
     } else if (n == 2) {
         return {"()()", "(())"};
     } else {
-        if (cache.find(n) == cache.end()) {
-            cache[n] = {};
+        if (C_ncacheparentesis.find(n) == C_ncacheparentesis.end()) {
+            C_ncacheparentesis[n] = {};
             for (int m = 0; m < n; ++m) {
-                for (const auto& p : recursiva(m, cache)) {
-                    for (const auto& q : recursiva(n - m, cache)) {
-                        cache[n].push_back(p + q);
-                        cache[n].push_back(q + p);
-                        cache[n].push_back(p.substr(0, p.size() / 2) + q + p.substr(p.size() / 2));
+                for (const auto& p : recursiva(m)) {
+                    for (const auto& q : recursiva(n - m)) {
+                        C_ncacheparentesis[n].push_back(p + q);
+                        C_ncacheparentesis[n].push_back(q + p);
+                        C_ncacheparentesis[n].push_back(p.substr(0, p.length() / 2) + q + p.substr(p.length() / 2));
                     }
                 }
             }
-            std::set<std::string> unique(cache[n].begin(), cache[n].end());
-            cache[n] = std::vector<std::string>(unique.begin(), unique.end());
+            std::set<std::string> unique_set(C_ncacheparentesis[n].begin(), C_ncacheparentesis[n].end());
+            C_ncacheparentesis[n].assign(unique_set.begin(), unique_set.end());
         }
-        return cache[n];
+        return C_ncacheparentesis[n];
     }
 }
 
 int main() {
-    std::unordered_map<int, std::vector<std::string>> cache;
     auto inicio = std::chrono::high_resolution_clock::now();
-    auto result = recursiva(12, cache);
-    auto fin = std::chrono::duration<double>(std::chrono::high_resolution_clock::now() - inicio).count();
+    auto result = recursiva(12);
+    auto fin = std::chrono::high_resolution_clock::now() - inicio;
 
-    // Imprime el tiempo de ejecución
-    std::cout << "Tiempo de ejecución: " << fin << " segundos" << std::endl;
+    std::chrono::duration<double> elapsed = fin;
+    std::cout << "Tiempo de ejecución: " << elapsed.count() << " segundos" << std::endl;
 
-    // abre el archivo
-    std::ofstream file("data/time_cpp.txt", std::ios::trunc);
-    if (file.is_open()) {
-        file << "c++," << fin << "\n"; // Agrega datos al final del archivo
-        file.close();
-    } else {
-        std::cerr << "No se pudo abrir el archivo." << std::endl;
+    std::ofstream time_file("data/time_cpp.txt");
+    time_file << "cpp," << elapsed.count() << "\n";
+    time_file.close();
+
+    std::ofstream output_file("data/output_cpp.txt");
+    for (const auto& r : result) {
+        output_file << r << "\n";
     }
+    output_file.close();
 
-    // guarda el resultado en un archivo
-    std::ofstream file_result("data/output_cpp.txt");
-    if (file_result.is_open()) {
-        for (const auto& r : result) {
-            file_result << r << std::endl;
-        }
-        file_result.close();
-    } else {
-        std::cerr << "No se pudo abrir el archivo." << std::endl;
-    }
-    
     return 0;
 }
